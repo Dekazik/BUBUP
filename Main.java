@@ -3,7 +3,7 @@
 /// Ввід: ["banana", "Apple", "cherry", "avocado"]
 /// Вивід: ["Apple", "avocado", "banana", "cherry"]
 
-public class Main {
+public class task2 {
     public static void main(String[] args) {
         String[] words = {"banana", "Apple", "cherry", "avocado"};
 
