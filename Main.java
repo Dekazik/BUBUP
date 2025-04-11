@@ -1,51 +1,47 @@
-/// Задача1. Відсортувати в масиві цілих чисел
-/// тільки парні елементи за зростанням.
-/// Непарні елементи залишаємо на своїх місцях.
+/// Задача2. Є масив строк. Необхідно відсортувати по першій літері слів
+/// (по алфавіту, ігноруючи регістр)
+/// Ввід: ["banana", "Apple", "cherry", "avocado"]
+/// Вивід: ["Apple", "avocado", "banana", "cherry"]
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {4, 7, 3, 2, 9, 6};
-        selectionSortEvensDesc(arr);
-        printArray(arr);
+        String[] words = {"banana", "Apple", "cherry", "avocado"};
+
+        sortByFirstLetter(words);
+        printArray(words);
     }
 
-    public static void selectionSortEvensDesc(int[] array) {
-        int count = 0;
-        for (int value : array) {
-            if (value % 2 == 0) {
-                count++;
-            }
-        }
-
-        int[] evenIndexes = new int[count];
-        int idx = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] % 2 == 0) {
-                evenIndexes[idx++] = i;
-            }
-        }
-
-        for (int i = 0; i < count - 1; i++) {
+    public static void sortByFirstLetter(String[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
             int minIdx = i;
-            for (int j = i + 1; j < count; j++) {
-                if (array[evenIndexes[j]] < array[evenIndexes[minIdx]]) {
+
+            for (int j = i + 1; j < array.length; j++) {
+                if (compareFirstChar(array[j], array[minIdx]) < 0) {
                     minIdx = j;
                 }
             }
-            swap(array, evenIndexes[i], evenIndexes[minIdx]);
+
+            swap(array, i, minIdx);
         }
     }
 
-    public static void swap(int[] array, int i, int j) {
+    public static int compareFirstChar(String str1, String str2) {
+        char char1 = Character.toLowerCase(str1.charAt(0));
+        char char2 = Character.toLowerCase(str2.charAt(0));
+        return Character.compare(char1, char2);
+    }
+
+    public static void swap(String[] array, int i, int j) {
         if (i == j) return;
-        int temp = array[i];
+        String temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
 
-    public static void printArray(int[] array) {
-        for (int el : array) {
-            System.out.print(el + " ");
+    public static void printArray(String[] array) {
+        for (String s : array) {
+            System.out.print(s + " ");
         }
+        System.out.println();
     }
 }
